@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description"
+        content="Explore Luxe Salon's portfolio of stunning hair transformations, cuts, and colors. Premium unisex salon gallery.">
+    <title>Gallery | Luxe Salon – Haircuts & Color</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #fef9f5;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand .brand-text {
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #b87b5a, #9b5e3c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #3e2c24 !important;
+            margin: 0 0.2rem;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #b46f4a !important;
+        }
+
+        .btn-primary {
+            background: #b46f4a;
+            border: none;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #9c5d3b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(180, 111, 74, 0.25);
+        }
+
+        /* Page header */
+        .page-header {
+            background: linear-gradient(120deg, #f6ede8 0%, #f3e6df 100%);
+            padding: 7rem 0 3rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .page-header h1 {
+            color: #2e241f;
+            letter-spacing: -0.5px;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+        }
+
+        .breadcrumb-item a {
+            text-decoration: none;
+            color: #b46f4a;
+        }
+
+        .breadcrumb-item.active {
+            color: #6b4c38;
+        }
+
+        /* Gallery filters */
+        .gallery-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1.5px solid #e2cfc2;
+            padding: 0.55rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #5a3e2e;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #b46f4a;
+            border-color: #b46f4a;
+            color: white;
+            box-shadow: 0 4px 10px rgba(180, 111, 74, 0.2);
+        }
+
+        /* Gallery cards */
+        .gallery-card {
+            position: relative;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4 / 3;
+            background: #f0e2d9;
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 100%);
+            color: white;
+            padding: 1.4rem 1rem;
+        }
+
+        .gallery-overlay h4 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .gallery-overlay p {
+            margin: 0.25rem 0 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1f1b18;
+            color: #ddd2ca;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: #f0dbcf;
+        }
+
+        .footer h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #f0dbcf;
+        }
+
+        .footer-links,
+        .footer-contact,
+        .footer-hours {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-links li,
+        .footer-contact li,
+        .footer-hours li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ddd2ca;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #b46f4a;
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 5rem 0 2rem;
+            }
+
+            .filter-btn {
+                padding: 0.4rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .gallery-overlay h4 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✂️%3C/text%3E%3C/svg%3E">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-text">LUXE SALON</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="contact.html#booking" class="btn btn-primary ms-lg-3 mt-3 mt-lg-0">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-4 fw-bold">Our Work</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section py-5">
+        <div class="container py-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="gallery-filters" id="filterButtons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="haircuts">Haircuts</button>
+                        <button class="filter-btn" data-filter="color">Color</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Grid - 5 images (3 Haircuts + 2 Color) -->
+            <div class="row g-4 gallery-grid" id="galleryGrid">
+                <!-- Modern Pixie (Haircut) -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="haircuts">
+                    <div class="gallery-card">
+                        <div class="gallery-image"
+                            style="background-image: url('https://t4.ftcdn.net/jpg/07/24/93/59/360_F_724935910_K91flJ8T3GhF5HcJg5ceFieGzjorQ3I8.webp');">
+                        </div>
+                        <div class="gallery-overlay">
+                            <h4>Modern Pixie</h4>
+                            <p>Sharp, bold & feminine</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executive Fade (Haircut) -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="haircuts">
+                    <div class="gallery-card">
+                        <div class="gallery-image"
+                            style="background-image: url('https://t4.ftcdn.net/jpg/12/27/43/47/240_F_1227434723_7ArjPoeSvFTvGOWWLb7yg1udQtDfFzob.jpg');">
+                        </div>
+                        <div class="gallery-overlay">
+                            <h4>Executive Fade</h4>
+                            <p>Clean, sophisticated cut</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ombre Melt (Color) -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="color">
+                    <div class="gallery-card">
+                        <div class="gallery-image"
+                            style="background-image: url('https://t3.ftcdn.net/jpg/06/31/00/20/240_F_631002054_DRSqC9EV36Jz3rOgbCmKhBf9oBxi91rF.jpg');">
+                        </div>
+                        <div class="gallery-overlay">
+                            <h4>Ombre Melt</h4>
+                            <p>Seamless color transition</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Textured Pixie (Haircut) -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="haircuts">
+                    <div class="gallery-card">
+                        <div class="gallery-image"
+                            style="background-image: url('https://t3.ftcdn.net/jpg/19/56/81/56/240_F_1956815692_LRxjNrrJbKP9bktlag4PpzaPnVJAMRT5.jpg');">
+                        </div>
+                        <div class="gallery-overlay">
+                            <h4>Textured Pixie</h4>
+                            <p>Effortless, piece-y layers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ruby Gloss (Color) -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="color">
+                    <div class="gallery-card">
+                        <div class="gallery-image"
+                            style="background-image: url('https://t3.ftcdn.net/jpg/11/38/33/54/240_F_1138335495_9e4ZtlwlNfNMvQbg7usXZU0SqvQuZFDc.jpg');">
+                        </div>
+                        <div class="gallery-overlay">
+                            <h4>Ruby Gloss</h4>
+                            <p>Rich, vibrant dimension</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 text-center">
+                <div class="col-12">
+                    <p class="text-muted small">Expert haircuts & custom color transformations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3 class="footer-title">LUXE SALON</h3>
+                    <p>Premium unisex salon dedicated to bringing out your best look in a welcoming, luxurious
+                        environment.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li>📍 123 Style Avenue, NY 10001</li>
+                        <li>📞 (555) 123-4567</li>
+                        <li>✉️ hello@luxesalon.com</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h4>Hours</h4>
+                    <ul class="footer-hours">
+                        <li>Mon - Fri: 9am - 8pm</li>
+                        <li>Saturday: 9am - 6pm</li>
+                        <li>Sunday: 10am - 4pm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2025 Luxe Salon. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p>Made with ❤️ for beautiful transformations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Filter functionality -->
+    <script>
+        (function () {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            function filterGallery(category) {
+                galleryItems.forEach(item => {
+                    if (category === 'all') {
+                        item.style.display = '';
+                    } else {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (itemCategory === category) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    const filterValue = this.getAttribute('data-filter');
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterGallery(filterValue);
+                });
+            });
+
+            filterGallery('all');
+        })();
+    </script>
+</body>
+
+</html>
